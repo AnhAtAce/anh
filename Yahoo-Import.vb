@@ -307,8 +307,6 @@ If objFileOrders.Size > 0 And objFileItems.Size > 0 And objFileMOM.Size > 0 And 
 ''''''''''''''''End of International Orders Implementation'''''''''''''''''
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-
-
 		'No shipping or billing address, most likely paypal gift certificate orders to be sent to an email address
 		if len(arrCSVOrders(9)) = 0 And len(arrCSVOrders(17)) = 0 Then
 			arrCSVOrders(9) = "91746"
@@ -370,11 +368,10 @@ If objFileOrders.Size > 0 And objFileItems.Size > 0 And objFileMOM.Size > 0 And 
 		if arrCSVOrders(22) = "Free Shipping On Orders Over $99" Then
 			arrCSVOrders(22) = "FREESHIP"
 		End If
-		if arrCSVOrders(22) = "Standard Shipping for Music only" Then
-		arrCSVOrders(22) = "STDM"
+		if arrCSVOrders(22) = "Standard Shipping" Then
+		arrCSVOrders(22) = "STDSHP"
 		End If
-		
-		
+	
 		'Transform Country Field to correct format
 		
 		If Len(arrCSVOrders(8)) = 0 And Len(arrCSVOrders(16)) <> 0 Then
@@ -407,8 +404,6 @@ If objFileOrders.Size > 0 And objFileItems.Size > 0 And objFileMOM.Size > 0 And 
 				arrCSVOrders(17) = Left(arrCSVOrders(17),5)
 			End If
 		End if
-		
-
 
 		'Truncate Order Entry and Referring Point Fields if too large
 		if Len(arrCSVOrders(20)) > 256 Then
@@ -417,8 +412,6 @@ If objFileOrders.Size > 0 And objFileItems.Size > 0 And objFileMOM.Size > 0 And 
 		if Len(arrCSVOrders(21)) > 256 Then
 			arrCSVOrders(21) = Left(arrCSVOrders(21), 255)
 		End If
-
-			
 
 		'Change Payment Method to match Everest
 		if arrCSVOrders(23) = "Visa" Then
@@ -433,7 +426,6 @@ If objFileOrders.Size > 0 And objFileItems.Size > 0 And objFileMOM.Size > 0 And 
 		if arrCSVOrders(23) = "Discover" Then
 			arrCSVOrders(23) = "YAHOO DISCOVER"
 		End If
-
 
 		'store array contents to fields
 		lngOrderID = arrCSVOrders(0)
