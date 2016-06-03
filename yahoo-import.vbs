@@ -491,7 +491,6 @@ If objFileOrders.Size > 0 And objFileItems.Size > 0 And objFileMOM.Size > 0 And 
 			EncaseQuotes(strAVSCode) & "," & EncaseQuotes(strGiftMessage))
 
 		'write to YahooItems.csv file
-		
 		Do while (arrCSVItems(0) = arrCSVOrders(0) And objReadFileItems.AtEndOfStream <> True) Or count = 2
 			intTax = 0
 			if arrCSVItems(2) = "Tax" Then
@@ -635,6 +634,13 @@ If objFileOrders.Size > 0 And objFileItems.Size > 0 And objFileMOM.Size > 0 And 
 			End If
 		Loop
 		
+		' Add discont from yahoo order file
+		If arrCSVOrders(44) > 0 Then
+			intLineNo = intLineNo + 1
+			objWriteYahooItems.WriteLine(lngItemOrderNo & "," & intLineNo & "," & _
+				EncaseQuotes("SALEDISC2") & "," & EncaseQuotes("SALEDISC2") & "," & _
+				1 & ",$" & arrCSVOrders(44)*-1)
+		End If
 		' Add item "PICK" if havn't already
 		If blnItemPick = 0 Then
 			intLineNo = intLineNo + 1
